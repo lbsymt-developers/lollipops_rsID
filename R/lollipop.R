@@ -82,3 +82,35 @@ lolliplot(list(A = sample.rs4147929, B = sample.rs3752241,
           list(x = features, y = features_2, z = gene))
 dev.off()
 
+
+
+# LOLLIPOPS DE APOE
+
+gene <- GRanges("chr19", IRanges(c(44904790, 44905791),
+                                 width=c(1000, 3603),
+                                 names=c("Promoter_region",
+                                         "APOE")))
+gene$fill <- c("#FF8833", "#51C6E6")
+
+snps <- GRanges("chr19", IRanges(start = c(44905579, 44905371, 44905307),
+                                 end = c(44905579, 44905371, 44905307),
+                                 width=1,
+                                 names=c("rs405509", "rs769446", "rs449647")))
+snps$color <- "red"
+snps$border <- "black"
+snps$alpha <- 0.8
+snps$label.parameter.rot <- 90
+
+features_1 <- GRanges("chr19", IRanges(c(44904790, 44905790),
+                                       width=c(1000, 737),
+                                       names=c("Promoter_region",
+                                               "ENST00000446996")))
+features_1$fill <- c("#FF8833", "#51C6E6")
+
+tiff("images/lollipop_APOE.tiff", height = 20, width = 20, units='cm',
+     compression = "lzw", res = 300)
+lolliplot(list(A = snps, B = snps),
+          list(x = features_1, y = gene))
+dev.off()
+
+
