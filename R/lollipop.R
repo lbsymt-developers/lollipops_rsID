@@ -114,3 +114,58 @@ lolliplot(list(A = snps, B = snps),
 dev.off()
 
 
+
+# LOLIPOPS DE TOMM40
+
+gene <- GRanges("chr19", IRanges(c(44889568, 44890569),
+                                 width=c(1000, 13121),
+                                 names=c("Promoter_region",
+                                         "TOMM40")))
+gene$fill <- c("#FF8833", "#51C6E6")
+
+snps <- GRanges("chr19", IRanges(start = c(44892962, 44893716, 44893408),
+                                 end = c(44892962, 44893716, 44893408),
+                                 width=1,
+                                 names=c("rs157582", "rs77301115", "rs59007384")))
+snps$color <- "red"
+snps$border <- "black"
+snps$alpha <- 0.8
+snps$label.parameter.rot <- 90
+
+snps_coding <- GRanges("chr19", IRanges(start = c(44890259),
+                                        end = c(44890259),
+                                        width=1,
+                                        names=c("rs117310449")))
+snps_coding$color <- "red"
+snps_coding$border <- "black"
+snps_coding$alpha <- 0.8
+snps_coding$label.parameter.rot <- 45
+
+features_1 <- GRanges("chr19", IRanges(c(44892828, 44893828),
+                                       width=c(1000, 707),
+                                       names=c("Promoter_region",
+                                               "ENST00000592041")))
+features_1$fill <- c("#FF8833", "#51C6E6")
+
+features_2 <- GRanges("chr19", IRanges(c(44889568, 44890568),
+                                       width=c(1000, 207),
+                                       names=c("Promoter_region",
+                                               "ENST00000589253")))
+features_2$fill <- c("#FF8833", "#51C6E6")
+
+
+all_snps <- GRanges("chr19", IRanges(start = c(44890259, 44892962, 44893716, 44893408),
+                                     end = c(44890259, 44892962, 44893716, 44893408),
+                                     width=1,
+                                     names=c("rs117310449", "rs157582", "rs77301115", "rs59007384")))
+all_snps$color <- "red"
+all_snps$border <- "black"
+all_snps$alpha <- 0.8
+all_snps$label.parameter.rot <- 45
+
+
+tiff("images/lollipop_TOMM40.tiff", height = 20, width = 20, units='cm',
+     compression = "lzw", res = 300)
+lolliplot(list(A = snps, B = snps_coding, C = all_snps),
+          list(x = features_1, y = features_2, z = gene))
+dev.off()
