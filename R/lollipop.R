@@ -5,6 +5,10 @@ hic <- readRDS("data/snps_mapping_HiC_granges.rds")
 hic <- data.frame(hic)
 hic <- hic[!duplicated(hic$rsid), ]
 
+HLA_DPA1 <- hic[hic$gene=="HLA-DPA1",]
+HLA_DPA1 <- na.omit(HLA_DPA1)
+readr::write_csv(HLA_DPA1, file = "HLA-DPA1_snps.csv")
+
 credpromoter <- data.frame(credpromoter)
 credpromoter <- credpromoter[!duplicated(credpromoter$start),]
 load("data/promoter_ranges.rda")
